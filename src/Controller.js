@@ -33,7 +33,6 @@ class Controller {
     while (true) {
       const input = await InputView.readNumber();
       const numberArray = Controller.makeInputToArray(input);
-      console.log(numberArray);
       const [ball, strike] = computer.compareNumber(numberArray);
 
       if (strike === 3) {

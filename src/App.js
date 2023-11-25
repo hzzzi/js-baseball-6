@@ -1,13 +1,10 @@
 import Controller from './Controller.js';
 
 class App {
-  async play() {
+  static async play() {
     const controller = new Controller();
-    controller.process();
+    await controller.process();
   }
 }
-
-const app = new App();
-app.play();
 
 export default App;
