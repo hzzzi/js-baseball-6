@@ -14,10 +14,6 @@ class Controller {
   async getInput() {
     const input = await InputView.readNumber();
     this.validateInput(input);
-    return input;
-  }
-
-  makeInputToArray(input) {
     const numberArray = input.split('').map(Number);
     return numberArray;
   }
@@ -53,15 +49,12 @@ class Controller {
 
     while (true) {
       const input = await this.getInput();
-      const numberArray = this.makeInputToArray(input);
-      const [ball, strike] = computer.compareNumber(numberArray);
-
+      const [ball, strike] = computer.compareNumber(input);
       if (strike === 3) {
         break;
       }
       this.showResult(ball, strike);
     }
-
     OutputView.GameSuccess();
     await this.restartOrEnd();
   }
