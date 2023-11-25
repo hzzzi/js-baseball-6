@@ -25,6 +25,31 @@ class Controller {
       OutputView.GameEnd();
     }
   }
+
+  async playing() {
+    const computer = new Computer();
+    computer.generateRandomNumber();
+
+    while (true) {
+      const input = await InputView.readNumber();
+      const numberArray = Controller.makeInputToArray(input);
+      console.log(numberArray);
+      const [ball, strike] = computer.compareNumber(numberArray);
+
+      if (strike === 3) {
+        break;
+      }
+      Controller.showResult(ball, strike);
+    }
+
+    OutputView.GameSuccess();
+    this.restartOrEnd();
+  }
+
+  async process() {
+    OutputView.GameStart();
+    this.playing();
+  }
 }
 
 export default Controller;
