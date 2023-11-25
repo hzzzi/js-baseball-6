@@ -11,6 +11,9 @@ const OutputView = {
   strike(strike) {
     Console.print(`${strike}스트라이크`);
   },
+  ballAndStrike(ball, strike) {
+    Console.print(`${ball}볼 ${strike}스트라이크`);
+  },
   nothing() {
     Console.print(`낫싱`);
   },

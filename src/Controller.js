@@ -23,18 +23,24 @@ class Controller {
   }
 
   showResult(ball, strike) {
-    if (ball !== 0 || strike !== 0) {
-      const isBall = ball !== 0 ? OutputView.ball(ball) : '';
-      const isStrike = strike !== 0 ? OutputView.strike(strike) : '';
-      return isBall + isStrike;
+    if (ball !== 0 && strike === 0) {
+      OutputView.ball(ball);
     }
-    OutputView.nothing();
+    if (ball === 0 && strike !== 0) {
+      OutputView.strike(strike);
+    }
+    if (ball !== 0 && strike !== 0) {
+      OutputView.ballAndStrike(ball, strike);
+    }
+    if (ball === 0 && strike === 0) {
+      OutputView.nothing();
+    }
   }
 
   async restartOrEnd() {
     const input = await InputView.restartOrEnd();
     if (input === '1') {
-      this.playing();
+      await this.playing();
     }
     if (input === '2') {
       OutputView.GameEnd();
@@ -57,7 +63,7 @@ class Controller {
     }
 
     OutputView.GameSuccess();
-    this.restartOrEnd();
+    await this.restartOrEnd();
   }
 
   async process() {
