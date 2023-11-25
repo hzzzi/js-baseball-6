@@ -15,6 +15,16 @@ class Controller {
     }
     OutputView.nothing();
   }
+
+  async restartOrEnd() {
+    const input = await InputView.restartOrEnd();
+    if (input === '1') {
+      this.playing();
+    }
+    if (input === '2') {
+      OutputView.GameEnd();
+    }
+  }
 }
 
 export default Controller;
