@@ -1,13 +1,28 @@
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import Computer from './model/Computer.js';
+import Validator from './Validator.js';
 
 class Controller {
-  static makeInputToArray(input) {
-    return input.split('').map(Number);
+  validateInput(input) {
+    Validator.isNothing(input);
+    Validator.isNumber(input);
+    Validator.isThreeDigits(input);
+    Validator.isDuplicated(input);
   }
 
-  static showResult(ball, strike) {
+  async getInput() {
+    const input = await InputView.readNumber();
+    this.validateInput(input);
+    return input;
+  }
+
+  makeInputToArray(input) {
+    const numberArray = input.split('').map(Number);
+    return numberArray;
+  }
+
+  showResult(ball, strike) {
     if (ball !== 0 || strike !== 0) {
       const isBall = ball !== 0 ? OutputView.ball(ball) : '';
       const isStrike = strike !== 0 ? OutputView.strike(strike) : '';
@@ -31,14 +46,14 @@ class Controller {
     computer.generateRandomNumber();
 
     while (true) {
-      const input = await InputView.readNumber();
-      const numberArray = Controller.makeInputToArray(input);
+      const input = await this.getInput();
+      const numberArray = this.makeInputToArray(input);
       const [ball, strike] = computer.compareNumber(numberArray);
 
       if (strike === 3) {
         break;
       }
-      Controller.showResult(ball, strike);
+      this.showResult(ball, strike);
     }
 
     OutputView.GameSuccess();
@@ -47,7 +62,7 @@ class Controller {
 
   async process() {
     OutputView.GameStart();
-    this.playing();
+    await this.playing();
   }
 }
 

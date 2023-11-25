@@ -18,4 +18,11 @@ const GAME = {
   },
 };
 
-export { MESSAGES, GAME };
+const ERROR = {
+  Nothing: '[ERROR] 숫자를 입력해주세요.',
+  NotNumber: '[ERROR] 숫자가 아닌 것은 입력할 수 없습니다.',
+  Digits: '[ERROR] 세 자리 수 숫자를 입력해주세요.',
+  Duplicated: '[ERROR] 중복된 숫자를 입력할 수 없습니다.',
+};
+
+export { MESSAGES, GAME, ERROR };
